@@ -1,7 +1,18 @@
+"use client";
+
+import useAuth from "@/hooks/useAuth";
+import SplashScreen from "./components/shared/SplashScreen";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+
 export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <p className="font-mono text-3xl">Habit Tracker PWA</p>
-    </div>
-  );
+  const { session } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (session) router.replace("/dashboard");
+    router.replace("/login");
+  }, [session, router]);
+
+  return <SplashScreen />;
 }

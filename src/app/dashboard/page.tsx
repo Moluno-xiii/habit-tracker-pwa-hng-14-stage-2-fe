@@ -1,16 +1,21 @@
-import React from "react";
-import ProtectedRoute from "../components/shared/ProtectedRoute";
+import DashboardPageUI from "@/components/dashboard/DashboardPageUI";
+import ProtectedRoute from "@/components/shared/ProtectedRoute";
+import HabitsProvider from "@/providers/HabitsProvider";
+import { Metadata } from "next";
 
-const DashboardPage: React.FC = () => {
-  return (
-    <ProtectedRoute>
-      <DashboardPageUI />
-    </ProtectedRoute>
-  );
+export const metadata: Metadata = {
+  title: "Dashboard | Habit Tracker",
+  description: "Habit tracker dashboard.",
 };
 
-const DashboardPageUI: React.FC = () => {
-  return <div> Dashbord page</div>;
+const DashboardPage = () => {
+  return (
+    <ProtectedRoute>
+      <HabitsProvider>
+        <DashboardPageUI />
+      </HabitsProvider>
+    </ProtectedRoute>
+  );
 };
 
 export default DashboardPage;

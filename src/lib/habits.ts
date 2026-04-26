@@ -41,4 +41,15 @@ class HabitsService {
 }
 
 const habitService = new HabitsService();
+
+const toggleHabitCompletion = (habit: Habit, date: string): Habit => {
+  return {
+    ...habit,
+    completions: habit.completions.includes(date)
+      ? habit.completions.filter((c) => c !== date)
+      : [...habit.completions, date],
+  };
+};
+
+export { toggleHabitCompletion };
 export default habitService;

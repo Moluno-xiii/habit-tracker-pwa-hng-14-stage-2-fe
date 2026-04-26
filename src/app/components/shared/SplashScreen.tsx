@@ -1,7 +1,10 @@
 const SplashScreen: React.FC = () => {
   return (
-    <div className="flex flex-1 flex-col items-center justify-center bg-purple-400 text-5xl text-red-600">
-      Splash screen
+    <div
+      data-testid="splash-screen"
+      className="flex flex-1 flex-col items-center justify-center text-5xl"
+    >
+      <p className="font-mono text-4xl">Habit Tracker</p>
     </div>
   );
 };

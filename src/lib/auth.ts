@@ -16,9 +16,9 @@ class AuthService {
 
   login({ email, password }: AuthenticateUserDTO) {
     const existingUser = this.getUserByEmail(email);
-    if (!existingUser) throw new Error("Incorrect email or password.");
+    if (!existingUser) throw new Error("Invalid email or password.");
     if (existingUser.password.toLowerCase() !== password.toLowerCase())
-      throw new Error("Incorrect email or password");
+      throw new Error("Invalid email or password");
     this.saveUserSession({ email, userId: existingUser.id });
   }
 

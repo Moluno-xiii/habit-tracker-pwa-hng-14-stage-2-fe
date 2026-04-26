@@ -1,37 +1,21 @@
-import React from "react";
-import ProtectedRoute from "../components/shared/ProtectedRoute";
+import DashboardPageUI from "@/components/dashboard/DashboardPageUI";
+import ProtectedRoute from "@/components/shared/ProtectedRoute";
+import HabitsProvider from "@/providers/HabitsProvider";
+import { Metadata } from "next";
 
-const habits = [];
+export const metadata: Metadata = {
+  title: "Dashboard | Habit Tracker",
+  description: "Habit tracker dashboard.",
+};
 
-const DashboardPage: React.FC = () => {
+const DashboardPage = () => {
   return (
     <ProtectedRoute>
-      <DashboardPageUI />
+      <HabitsProvider>
+        <DashboardPageUI />
+      </HabitsProvider>
     </ProtectedRoute>
   );
 };
 
-const DashboardPageUI: React.FC = () => {
-  if (!habits.length) return <EmptyState />;
-  return (
-    <div
-      data-testid="dashboard-page"
-      className="flex flex-1 flex-col items-center justify-center"
-    >
-      Dashbord page
-    </div>
-  );
-};
-
 export default DashboardPage;
-
-const EmptyState = () => {
-  return (
-    <div
-      data-testid="empty-state"
-      className="flex flex-1 items-center justify-center bg-amber-300"
-    >
-      <p>No Habits yet</p>
-    </div>
-  );
-};

@@ -10,11 +10,14 @@ const ProtectedRoute = ({ children }: PropsWithChildren) => {
   const router = useRouter();
 
   useEffect(() => {
+    if (session === undefined) return;
     if (session === null) router.replace("/login");
   }, [session, router]);
 
-  if (!session) return <SplashScreen />;
-  return children;
+  if (session === undefined) return <SplashScreen />;
+  if (session) {
+    return children;
+  }
 };
 
 export default ProtectedRoute;

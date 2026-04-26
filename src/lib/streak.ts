@@ -1,6 +1,8 @@
+import { Habit } from "@/types/habit";
+
 const calculateCurrentStreak = (
-  completions: string[],
   today: string = new Date().toISOString().slice(0, 10),
+  completions: string[],
 ): number => {
   const sortedDates = Array.from(new Set(completions)).sort();
   const sortedSet = new Set(sortedDates);
@@ -21,4 +23,8 @@ const calculateCurrentStreak = (
   return streak;
 };
 
-export { calculateCurrentStreak };
+const getCompletedToday = (today: string, habits: Habit[]): number => {
+  return habits.filter((h) => h.completions.includes(today)).length;
+};
+
+export { calculateCurrentStreak, getCompletedToday };

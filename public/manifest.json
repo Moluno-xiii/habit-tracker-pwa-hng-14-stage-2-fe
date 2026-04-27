@@ -1,20 +1,14 @@
 {
-  "name": "Habit Tracker — Daily Ledger",
+  "name": "Habit Tracker | Daily Ledger",
   "short_name": "Ledger",
-  "description": "An almanac for the small disciplines that compound into a life.",
   "start_url": "/",
-  "scope": "/",
   "display": "standalone",
-  "orientation": "portrait",
   "background_color": "#ece1c7",
   "theme_color": "#c03b15",
+  "description": "An almanac for the small disciplines that compound into a life.",
+  "scope": "/",
+  "orientation": "portrait",
   "icons": [
-    {
-      "src": "/icon.svg",
-      "type": "image/svg+xml",
-      "sizes": "any",
-      "purpose": "any"
-    },
     {
       "src": "/icon-maskable.svg",
       "type": "image/svg+xml",

@@ -19,7 +19,6 @@ const HabitForm = ({ onSubmit, onCancel, defaultValues }: Props) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData) as unknown as CreateHabitDTO;
-    console.log("habit form data \n", data);
 
     try {
       setError(null);

@@ -1,4 +1,4 @@
-export type Habit = {
+type Habit = {
   id: string;
   userId: string;
   name: string;
@@ -7,3 +7,7 @@ export type Habit = {
   createdAt: string;
   completions: string[];
 };
+
+type CreateHabitDTO = Pick<Habit, "name" | "description" | "frequency">;
+
+export type { Habit, CreateHabitDTO };

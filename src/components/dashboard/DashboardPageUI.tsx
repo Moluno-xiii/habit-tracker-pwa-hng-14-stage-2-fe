@@ -10,10 +10,11 @@ import EmptyState from "./EmptyState";
 import CreateHabitModal from "./CreateHabitModal";
 import ConfirmDialog from "../shared/ConfirmDialog";
 import useAuth from "@/hooks/useAuth";
+import { CreateHabitDTO } from "@/types/habit";
 
 const DashboardPageUI = () => {
   const { logout } = useAuth();
-  const { habits, today } = useHabits();
+  const { habits, today, createHabit } = useHabits();
   const [createOpen, setCreateOpen] = useState(false);
   const [logoutOpen, setLogoutOpen] = useState(false);
 
@@ -69,6 +70,10 @@ const DashboardPageUI = () => {
       </footer>
 
       <CreateHabitModal
+        onSubmitHabit={(data: CreateHabitDTO) => {
+          createHabit(data);
+          setCreateOpen(false);
+        }}
         isModalOpen={createOpen}
         onCloseModal={() => setCreateOpen(false)}
       />

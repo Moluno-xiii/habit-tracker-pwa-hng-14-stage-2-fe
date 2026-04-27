@@ -20,6 +20,10 @@ class HabitsService {
     return storageService.getStoredData<Habit[]>(this.HABIT_TRACKER_KEY) ?? [];
   }
 
+  getAllHabitsByUserId(userId: string): Habit[] {
+    return this.getAllHabits().filter((h) => h.userId === userId);
+  }
+
   updateHabit(habitId: string, updatedData: Habit): void {
     const existingHabits = this.getAllHabits();
     const newHabits = existingHabits.map((h) => {

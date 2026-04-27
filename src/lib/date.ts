@@ -7,4 +7,8 @@ const getDateInLongFormat = (date: string) => {
   });
 };
 
-export { getDateInLongFormat };
+const getSlicedDate = () => {
+  return new Date().toISOString().slice(0, 10);
+};
+
+export { getDateInLongFormat, getSlicedDate };

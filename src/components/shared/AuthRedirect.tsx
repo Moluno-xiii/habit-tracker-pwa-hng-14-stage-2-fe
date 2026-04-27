@@ -1,22 +1,21 @@
 "use client";
 
 import useAuth from "@/hooks/useAuth";
+import { useRouter } from "next/navigation";
 import { PropsWithChildren, useEffect } from "react";
 import SplashScreen from "./SplashScreen";
-import { useRouter } from "next/navigation";
 
-const ProtectedRoute = ({ children }: PropsWithChildren) => {
+const AuthRedirect: React.FC<PropsWithChildren> = ({ children }) => {
   const { session } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
     if (session === undefined) return;
-    if (session === null) router.replace("/login");
-  }, [session, router]);
+    if (session) router.replace("/dashboard");
+  }, [router, session]);
 
-  if (session) return children;
-
+  if (session === null) return children;
   return <SplashScreen />;
 };
 
-export default ProtectedRoute;
+export default AuthRedirect;

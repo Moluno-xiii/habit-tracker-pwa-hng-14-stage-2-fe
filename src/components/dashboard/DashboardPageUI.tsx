@@ -9,8 +9,10 @@ import HabitList from "../habits/HabitList";
 import EmptyState from "./EmptyState";
 import CreateHabitModal from "./CreateHabitModal";
 import ConfirmDialog from "../shared/ConfirmDialog";
+import useAuth from "@/hooks/useAuth";
 
 const DashboardPageUI = () => {
+  const { logout } = useAuth();
   const { habits, today } = useHabits();
   const [createOpen, setCreateOpen] = useState(false);
   const [logoutOpen, setLogoutOpen] = useState(false);
@@ -73,7 +75,7 @@ const DashboardPageUI = () => {
       <ConfirmDialog
         open={logoutOpen}
         onClose={() => setLogoutOpen(false)}
-        onConfirm={() => {}}
+        onConfirm={logout}
         title="Close the ledger for today?"
         eyebrow="Sign out"
         message="Your entries remain. You can return whenever the day asks for another mark."

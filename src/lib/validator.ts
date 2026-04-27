@@ -16,3 +16,5 @@ const validateHabitName = (
     };
   return { valid: true, value: transformedName, error: null };
 };
+
+export { validateHabitName };

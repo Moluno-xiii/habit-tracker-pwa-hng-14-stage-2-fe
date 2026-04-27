@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { getHabitSlug } from "@/lib/slug";
 import { calculateCurrentStreak } from "@/lib/streak";
-import { Habit } from "@/types/habit";
+import { CreateHabitDTO, Habit } from "@/types/habit";
 import ConfirmDialog from "../shared/ConfirmDialog";
 import Modal from "../shared/Modal";
 import HabitForm from "./HabitForm";
@@ -12,6 +12,7 @@ import {
   HiOutlineTrash,
   HiCheck,
 } from "react-icons/hi2";
+import useHabits from "@/hooks/useHabits";
 
 type Props = {
   habit: Habit;
@@ -22,6 +23,7 @@ const HabitCard = ({
   habit,
   today = new Date().toISOString().slice(0, 10),
 }: Props) => {
+  const { deleteHabit, updateHabit, toggleHabitCompletionStatus } = useHabits();
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
 
@@ -78,6 +80,7 @@ const HabitCard = ({
 
       <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 px-6 py-4 sm:px-8">
         <button
+          onClick={() => toggleHabitCompletionStatus(habit)}
           type="button"
           data-testid={`habit-complete-${slug}`}
           aria-pressed={completedToday}
@@ -130,7 +133,14 @@ const HabitCard = ({
             name: habit.name,
             description: habit.description,
           }}
-          onSubmit={() => setEditOpen(false)}
+          onSubmit={(data: CreateHabitDTO) => {
+            updateHabit({
+              ...habit,
+              name: data.name,
+              description: data.description,
+            });
+            setEditOpen(false);
+          }}
           onCancel={() => setEditOpen(false)}
         />
       </Modal>
@@ -138,7 +148,7 @@ const HabitCard = ({
       <ConfirmDialog
         open={confirmOpen}
         onClose={() => setConfirmOpen(false)}
-        onConfirm={() => {}}
+        onConfirm={() => deleteHabit(habit.id)}
         title={`Erase “${habit.name}” from the ledger?`}
         eyebrow="Permanent action"
         message="This entry and every mark beneath it will be removed. The pages will not remember."

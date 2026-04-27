@@ -14,6 +14,7 @@ const AuthRedirect: React.FC<PropsWithChildren> = ({ children }) => {
     if (session) router.replace("/dashboard");
   }, [router, session]);
 
+  if (session) return null;
   if (session === null) return children;
   return <SplashScreen />;
 };

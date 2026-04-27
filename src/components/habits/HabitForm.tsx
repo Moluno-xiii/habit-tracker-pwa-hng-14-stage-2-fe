@@ -1,22 +1,37 @@
 "use client";
 
-import { SubmitEvent } from "react";
+import { CreateHabitDTO } from "@/types/habit";
+import { SubmitEvent, useState } from "react";
+import { HiLockClosed, HiOutlineBookmark } from "react-icons/hi2";
 import FormInput from "../ui/FormInput";
-import { HiOutlineBookmark, HiLockClosed } from "react-icons/hi2";
+import { validateHabitName } from "@/lib/validator";
+import ErrorDisplay from "../ui/ErrorDisplay";
 
 type Props = {
-  onSubmit: () => void;
+  onSubmit: (data: CreateHabitDTO) => void;
   onCancel: () => void;
   defaultValues?: { name: string; description: string };
 };
 
 const HabitForm = ({ onSubmit, onCancel, defaultValues }: Props) => {
+  const [error, setError] = useState<string | null>(null);
   const submitForm = (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData);
+    const data = Object.fromEntries(formData) as unknown as CreateHabitDTO;
     console.log("habit form data \n", data);
-    onSubmit();
+
+    try {
+      setError(null);
+      const { error: validationError, valid } = validateHabitName(data.name);
+      if (!valid) throw new Error(validationError!);
+
+      onSubmit(data);
+    } catch (e) {
+      const errMessage =
+        e instanceof Error ? e.message : "Unexpected error, try again";
+      setError(errMessage);
+    }
   };
 
   return (
@@ -24,10 +39,8 @@ const HabitForm = ({ onSubmit, onCancel, defaultValues }: Props) => {
       data-testid="habit-form"
       onSubmit={submitForm}
       className="flex flex-col gap-7"
-      noValidate
     >
       <FormInput
-        required
         inputTestId="habit-name-input"
         label="Habit"
         name="name"
@@ -86,7 +99,7 @@ const HabitForm = ({ onSubmit, onCancel, defaultValues }: Props) => {
           />
         </div>
       </div>
-
+      <ErrorDisplay error={error} />
       <div className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
         <button
           type="button"

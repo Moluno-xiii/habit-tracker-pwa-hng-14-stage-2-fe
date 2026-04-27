@@ -6,7 +6,7 @@ const validateHabitName = (
     return {
       valid: false,
       value: transformedName,
-      error: "Habit name is requird",
+      error: "Habit name is required",
     };
   if (transformedName.length > 60)
     return {

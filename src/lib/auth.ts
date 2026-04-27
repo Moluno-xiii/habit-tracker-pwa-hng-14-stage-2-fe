@@ -1,9 +1,10 @@
 import { AuthenticateUserDTO, Session, User } from "@/types/auth";
 import storageService from "./storage";
+import { SESSION_KEY, USERS_KEY } from "./constants";
 
 class AuthService {
-  private USERS_INFO_KEY: string = "habit-tracker-users";
-  private USER_SESSION_KEY: string = "habit-tracker-session";
+  private USERS_INFO_KEY: string = USERS_KEY;
+  private USER_SESSION_KEY: string = SESSION_KEY;
 
   constructor() {}
 

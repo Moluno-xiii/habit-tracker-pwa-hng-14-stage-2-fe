@@ -1,8 +1,9 @@
 import { Habit } from "@/types/habit";
 import storageService from "./storage";
+import { HABITS_KEY } from "./constants";
 
 class HabitsService {
-  private HABIT_TRACKER_KEY: string = "habit-tracker-habits";
+  private HABIT_TRACKER_KEY: string = HABITS_KEY;
 
   constructor() {}
 

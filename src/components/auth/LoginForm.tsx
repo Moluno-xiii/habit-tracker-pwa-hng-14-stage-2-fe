@@ -15,7 +15,6 @@ const LoginForm = () => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData) as unknown as AuthenticateUserDTO;
-    console.log("login form data \n", data);
 
     try {
       setError(null);

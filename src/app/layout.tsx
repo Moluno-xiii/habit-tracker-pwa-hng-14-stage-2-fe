@@ -1,3 +1,4 @@
+import ServiceWorkerRegistrar from "@/components/shared/ServiceWorkerRegistrar";
 import AppProvider from "@/providers/AppProvider";
 import type { Metadata } from "next";
 import { ABeeZee, Fraunces, Geist_Mono } from "next/font/google";
@@ -60,6 +61,7 @@ export default function RootLayout({
         <div className="relative z-10 flex flex-1 flex-col">
           <AppProvider>{children}</AppProvider>
         </div>
+        <ServiceWorkerRegistrar />
       </body>
     </html>
   );

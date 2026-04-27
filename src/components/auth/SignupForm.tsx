@@ -1,15 +1,30 @@
 "use client";
 
-import { SubmitEvent } from "react";
+import { SubmitEvent, useState } from "react";
 import FormInput from "../ui/FormInput";
 import { HiArrowRight } from "react-icons/hi2";
+import useAuth from "@/hooks/useAuth";
+import { AuthenticateUserDTO } from "@/types/auth";
+import ErrorDisplay from "../ui/ErrorDisplay";
 
 const SignupForm = () => {
+  const { signup } = useAuth();
+  const [error, setError] = useState<string | null>(null);
+
   const submitForm = (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData);
+    const data = Object.fromEntries(formData) as unknown as AuthenticateUserDTO;
     console.log("signup form data \n", data);
+
+    try {
+      setError(null);
+      signup(data);
+    } catch (e) {
+      const errorMessage =
+        e instanceof Error ? e.message : "Unexpected error, try again";
+      setError(errorMessage);
+    }
   };
 
   return (
@@ -17,7 +32,6 @@ const SignupForm = () => {
       data-testid="signup-form"
       onSubmit={submitForm}
       className="flex flex-col gap-7"
-      noValidate
     >
       <FormInput
         required
@@ -35,7 +49,9 @@ const SignupForm = () => {
         autoComplete="new-password"
         hint="min. 8 characters"
         placeholder="choose carefully"
+        minLength={8}
       />
+      <ErrorDisplay error={error} />
       <button
         type="submit"
         data-testid="auth-signup-submit"

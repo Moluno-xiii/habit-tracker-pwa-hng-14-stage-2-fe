@@ -45,8 +45,8 @@ const AuthContextProvider = ({ children }: PropsWithChildren) => {
   };
 
   const logout = () => {
-    authService.logout();
     setSession(null);
+    authService.logout();
   };
 
   return (

@@ -124,11 +124,12 @@ This satisfies the brief's "render offline after it has been loaded once" and "d
 
 ## Trade-offs and limitations
 
+- **Streak resets to 0 once the calendar day changes.** Per PRD, `calculateCurrentStreak` returns `0` if today is not in completions, even when yesterday was marked and today is still in progress. A user reading the dashboard mid-day will see a `0` that arguably should still be a `1`.
 - **No remote backend.** Authentication is a `localStorage` shim, not a real auth system. Passwords are stored in plain text; nothing leaves the device. This is appropriate for the assignment's scope but disqualifies the app for any multi-device or shared account use.
 - **No password hashing or rate limiting.** The login check is a case-insensitive string compare. In a real product this would sit behind argon2/bcrypt and a backend.
 - **`localStorage` ceiling.** The browser caps storage at roughly 5 MB per origin. Habits are tiny, but a long-lived account could in principle approach that limit. There is no compaction, archiving, or quota handling.
 - **No background sync.** When offline, habit toggles still write to `localStorage` and display correctly, but there is nothing to sync to a server later because there is no server.
-- **Frequency is locked to "daily".** The data model and UI both reserve room for other frequencies, but only "daily" is implemented. Adding "weekly"/"monthly" requires a different streak algorithm.
+- **Frequency is locked to "daily".** The data model and UI both reserve room for other frequencies, but only "daily" is implemented.
 
 ## Test files and the behavior each one verifies
 

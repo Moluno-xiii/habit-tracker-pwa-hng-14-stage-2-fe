@@ -28,7 +28,7 @@ const HabitCard = ({
   const [editOpen, setEditOpen] = useState(false);
 
   const slug = getHabitSlug(habit.name);
-  const streak = calculateCurrentStreak(today, habit.completions);
+  const streak = calculateCurrentStreak(habit.completions, today);
   const completedToday = habit.completions.includes(today);
 
   return (

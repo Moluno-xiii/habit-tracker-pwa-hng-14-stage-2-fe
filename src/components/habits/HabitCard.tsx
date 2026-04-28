@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { getHabitSlug } from "@/lib/slug";
-import { calculateCurrentStreak } from "@/lib/streak";
+import { calculateCurrentStreak } from "@/lib/streaks";
 import { CreateHabitDTO, Habit } from "@/types/habit";
 import ConfirmDialog from "../shared/ConfirmDialog";
 import Modal from "../shared/Modal";
@@ -57,7 +57,6 @@ const HabitCard = ({
             </p>
           )}
         </div>
-
         <div className="flex items-start gap-5 sm:flex-col sm:items-end sm:gap-1">
           <div className="text-left sm:text-right">
             <p
@@ -67,7 +66,7 @@ const HabitCard = ({
               {String(streak).padStart(2, "0")}
             </p>
             <p className="ledger-num text-ink-soft mt-1 text-[10px] tracking-[0.22em] uppercase">
-              {streak === 1 ? "Day · streak" : "Days · streak"}
+              {streak === 1 ? "Day streak" : "Days streak"}
             </p>
           </div>
           {completedToday && (

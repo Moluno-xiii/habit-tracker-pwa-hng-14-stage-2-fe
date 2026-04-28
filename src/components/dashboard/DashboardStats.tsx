@@ -1,7 +1,7 @@
 "use client";
 
 import useHabits from "@/hooks/useHabits";
-import { getCompletedToday } from "@/lib/streak";
+import { getCompletedToday } from "@/lib/streaks";
 import Stat from "./Stat";
 
 const DashboardStats: React.FC = () => {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { calculateCurrentStreak } from "@/lib/streak";
+import { calculateCurrentStreak } from "@/lib/streaks";
 
 const todaysDate = "2026-04-27";
 
@@ -8,9 +8,15 @@ describe("calculateCurrentStreak", () => {
     expect(calculateCurrentStreak(todaysDate, [])).toBe(0);
   });
 
-  it("returns 0 when today is not completed", () => {
+  it("counts the streak from yesterday when today is not yet completed", () => {
     expect(
       calculateCurrentStreak(todaysDate, ["2026-04-26", "2026-04-25"]),
+    ).toBe(2);
+  });
+
+  it("returns 0 when neither today nor yesterday is completed", () => {
+    expect(
+      calculateCurrentStreak(todaysDate, ["2026-04-25", "2026-04-24"]),
     ).toBe(0);
   });
 

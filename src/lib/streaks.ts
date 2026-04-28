@@ -5,19 +5,18 @@ const calculateCurrentStreak = (
   completions: string[],
 ): number => {
   const sortedDates = Array.from(new Set(completions)).sort();
-  const sortedSet = new Set(sortedDates);
+  const completionSet = new Set(sortedDates);
+  const cursor = new Date(today);
 
-  if (!sortedSet.has(today)) return 0;
+  if (!completionSet.has(today)) {
+    cursor.setDate(cursor.getDate() - 1);
+    if (!completionSet.has(cursor.toISOString().slice(0, 10))) return 0;
+  }
 
   let streak = 0;
-  const currentDate = new Date(today);
-
-  while (true) {
-    const dateString = currentDate.toISOString().slice(0, 10);
-    if (!sortedSet.has(dateString)) break;
-
+  while (completionSet.has(cursor.toISOString().slice(0, 10))) {
     streak++;
-    currentDate.setDate(currentDate.getDate() - 1);
+    cursor.setDate(cursor.getDate() - 1);
   }
 
   return streak;

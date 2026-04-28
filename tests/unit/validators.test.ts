@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { validateHabitName } from "@/lib/validator";
+import { validateHabitName } from "@/lib/validators";
 
 describe("validateHabitName", () => {
   it("returns an error when habit name is empty", () => {

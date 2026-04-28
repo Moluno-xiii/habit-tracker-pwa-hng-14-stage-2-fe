@@ -4,7 +4,7 @@ import { CreateHabitDTO } from "@/types/habit";
 import { SubmitEvent, useState } from "react";
 import { HiLockClosed, HiOutlineBookmark } from "react-icons/hi2";
 import FormInput from "../ui/FormInput";
-import { validateHabitName } from "@/lib/validator";
+import { validateHabitName } from "@/lib/validators";
 import ErrorDisplay from "../ui/ErrorDisplay";
 
 type Props = {
